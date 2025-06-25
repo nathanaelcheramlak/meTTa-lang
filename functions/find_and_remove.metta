@@ -16,6 +16,13 @@
 !(findRemove (1 2 3 6 5 6) 6)
 
 
+;; Non-deterministically 
+(= (remove $list $val) (
+    collapse (let $x (superpose $list) (if (== $x $val) (empty) $x))
+))
+
+!(remove (1 2 3 6 5 6) 6)
+
 ; Recursive List Version
 (= (findRemoveR () $val) ())
 (= (findRemoveR (:: $x $xs) $val) (
